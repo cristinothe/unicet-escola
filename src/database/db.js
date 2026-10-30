@@ -17,4 +17,29 @@ db.serialize(() => {
   `);
 });
 
+
+// Inicializa a tabela caso ela não exista
+db.serialize(() => {
+  db.run(`
+    CREATE TABLE IF NOT EXISTS cursos (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome TEXT NOT NULL,
+      cargaHoraria INTEGER,
+      turno TEXT
+    )
+  `);
+});
+
+// Inicializa a tabela caso ela não exista
+db.serialize(() => {
+  db.run(`
+    CREATE TABLE IF NOT EXISTS disciplinas (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome TEXT NOT NULL,
+      codigo TEXT NOT NULL UNIQUE,
+      cargaHoraria INTEGER,
+      curso_id INTEGER 
+    )
+  `);
+});
 module.exports = db;
