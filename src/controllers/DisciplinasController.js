@@ -19,7 +19,7 @@ class DisciplinasController {
     });
   }
 
-  // Salvar Cursos
+  // Salvar Disciplinas
   static salvar(req, res) {
     const { nome, codigo, cargaHoraria, curso_id } = req.body;
     if (!nome || !codigo) {
@@ -40,12 +40,12 @@ class DisciplinasController {
     });
   }
 
-  // Editar Curso
+  // Editar Disciplinas
   static editar(req, res) {
     const { id } = req.params;
     const { nome, codigo, cargaHoraria, curso_id} = req.body;
 
-    const sql = `UPDATE disciplinas SET nome = ?, codigo = ?, cargaHoraria = ?, curso_id = ?, WHERE id = ?`;
+    const sql = `UPDATE disciplinas SET nome = ?, codigo = ?, cargaHoraria = ?, curso_id = ? WHERE id = ?`;
     db.run(sql, [nome, codigo, cargaHoraria, curso_id, id], function(err) {
       if (err) return res.status(500).json({ erro: err.message });
       if (this.changes === 0) return res.status(404).json({ erro: "Disciplina não encontrada." });
@@ -53,7 +53,7 @@ class DisciplinasController {
     });
   }
 
-  // Deletar curso
+  // Deletar Disciplinas
   static deletar(req, res) {
     const { id } = req.params;
     db.run("DELETE FROM disciplinas WHERE id = ?", [id], function(err) {
