@@ -1,3 +1,5 @@
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./src/docs/swagger-output.json');
 const express = require('express');
 const estudanteRoutes = require('./src/routes/estudanteRoutes');
 const cursosRoutes = require('./src/routes/cursosRoutes');
@@ -6,6 +8,7 @@ const matriculaRoutes = require('./src/routes/matriculaRoutes');
 const app = express();
 const PORT = 3000;
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json());
 app.use('/', estudanteRoutes);
 app.use('/', cursosRoutes);
