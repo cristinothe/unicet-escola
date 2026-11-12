@@ -25,6 +25,9 @@ class EstudanteController {
   // #swagger.summary = 'Listar Estudante por nome'
   static listarNome(req, res) {
     const { nome } = req.query;
+    if (!nome) {
+      return res.status(400).json({ erro: "O 'nome' é obrigatório." });
+    }
     if (nome) {
       const sql = "SELECT * FROM estudantes WHERE nome LIKE ?";
       return db.all(sql, [`%${nome}%`], (err, rows) => {
