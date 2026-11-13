@@ -1,7 +1,8 @@
 const db = require('../database/db');
 
 class NotasController {
-  // Listar Todos
+  // #swagger.tags = ['Notas']
+  // #swagger.summary = 'Listar todas as Notas cadastrados'
   static listarTodos(req, res) {
     db.all("SELECT * FROM notas", [], (err, rows) => {
       if (err) return res.status(500).json({ erro: err.message });
@@ -9,7 +10,8 @@ class NotasController {
     });
   }
 
-  // Listar por ID
+  // #swagger.tags = ['Notas']
+  // #swagger.summary = 'Listar Nota por Id'
   static listarPorId(req, res) {
     const { id } = req.params;
     db.get("SELECT * FROM notas WHERE id = ?", [id], (err, row) => {
@@ -19,7 +21,8 @@ class NotasController {
     });
   }
 
-  // Salvar Nota
+  // #swagger.tags = ['Notas']
+  // #swagger.summary = 'Salvar Nota cadastrada'
   static salvar(req, res) {
     const { matricula_id, disciplina_id, valor, tipoAvaliacao, dataLancamento} = req.body;
     if (!matricula_id|| !disciplina_id) {
@@ -42,7 +45,8 @@ class NotasController {
     });
   }
 
-  // Editar Nota
+  // #swagger.tags = ['Notas']
+  // #swagger.summary = 'Editar Nota'
   static editar(req, res) {
     const { id } = req.params;
     const { matricula_id, disciplina_id, valor, tipoAvaliacao, dataLancamento} = req.body;
@@ -55,7 +59,8 @@ class NotasController {
     });
   }
 
-  // Deletar Nota
+  // #swagger.tags = ['Notas']
+  // #swagger.summary = 'Deletar Nota'
   static deletar(req, res) {
     const { id } = req.params;
     db.run("DELETE FROM notas WHERE id = ?", [id], function(err) {

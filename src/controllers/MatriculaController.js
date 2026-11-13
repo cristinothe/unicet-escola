@@ -1,7 +1,8 @@
 const db = require('../database/db');
 
 class MatriculaController {
-  // Listar Todos
+  // #swagger.tags = ['MATRICULAS']
+  // #swagger.summary = 'Listar todas as matriculas cadastradas'
   static listarTodos(req, res) {
     db.all("SELECT * FROM matriculas", [], (err, rows) => {
       if (err) return res.status(500).json({ erro: err.message });
@@ -9,7 +10,8 @@ class MatriculaController {
     });
   }
 
-  // Listar por ID
+  // #swagger.tags = ['MATRICULAS']
+  // #swagger.summary = 'Listar matricula por Id'
   static listarPorId(req, res) {
     const { id } = req.params;
     db.get("SELECT * FROM matriculas WHERE id = ?", [id], (err, row) => {
@@ -19,7 +21,8 @@ class MatriculaController {
     });
   }
 
-  // Salvar Matricula
+  // #swagger.tags = ['MATRICULAS']
+  // #swagger.summary = 'Salvar matricula cadastrada'
   static salvar(req, res) {
     const { estudante_id, curso_id, numeroMatricula, dataMatricula, status } = req.body;
     if (!numeroMatricula|| !estudante_id) {
@@ -42,7 +45,8 @@ class MatriculaController {
     });
   }
 
-  // Editar Matricula
+  // #swagger.tags = ['MATRICULAS']
+  // #swagger.summary = 'Editar matricula'
   static editar(req, res) {
     const { id } = req.params;
     const { estudante_id, curso_id, numeroMatricula, dataMatricula, status} = req.body;
@@ -55,7 +59,8 @@ class MatriculaController {
     });
   }
 
-  // Deletar Matricula
+  // #swagger.tags = ['MATRICULAS']
+  // #swagger.summary = 'Deletar matricula'
   static deletar(req, res) {
     const { id } = req.params;
     db.run("DELETE FROM matriculas WHERE id = ?", [id], function(err) {
