@@ -22,6 +22,30 @@ class EstudanteController {
   }
 
   // #swagger.tags = ['ESTUDANTES']
+  // #swagger.summary = 'Listar Estudante por nome'
+  static listarNome(req, res) {
+    const { nome } = req.query;
+    if (nome) {
+      const sql = "SELECT * FROM estudantes WHERE nome LIKE ?";
+      return db.all(sql, [`%${nome}%`], (err, rows) => {
+        if (err) return res.status(500).json({ erro: err.message });
+        return res.status(200).json(rows);
+      });
+    }else{
+
+     db.all("SELECT * FROM estudantes", [], (err, rows) => {
+     if (err) return res.status(500).json({ erro: err.message });
+        return res.status(200).json(rows);
+     });
+
+    }
+
+    }
+
+   
+
+
+  // #swagger.tags = ['ESTUDANTES']
   // #swagger.summary = 'Salvar Estudante cadastrado'
   static salvar(req, res) {
     const { nome, dataNascimento, telefone } = req.body;

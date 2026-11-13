@@ -31,7 +31,12 @@ class ProfessoresController {
 
     const sql = `INSERT INTO professores (nome, email, titulacao, telefone) VALUES (?, ?, ?, ?)`;
     db.run(sql, [nome, email, titulacao, telefone], function(err) {
-      if (err) return res.status(500).json({ erro: err.message });
+      if (err) {
+                  if (err.code === 'SQLITE_CONSTRAINT') {
+                     return res.status(409).json({ erro: "Já existe um professor cadastrado com este e-mail." });
+                    }
+               }
+               return res.status(500).json({erro: err.message });
 
       // this.lastID retorna o ID gerado pelo banco
       return res.status(201).json({

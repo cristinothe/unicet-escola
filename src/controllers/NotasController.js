@@ -28,7 +28,9 @@ class NotasController {
     if (!matricula_id|| !disciplina_id) {
       return res.status(400).json({ erro: "Maticula e disciplina são obrigatórios." });
     }
-
+    if (valor < 0 || valor > 10) {
+      return res.status(400).json({ erro: "A nota deve estar entre 0.0 e 10.0." });
+    }
     const sql = `INSERT INTO notas (matricula_id, disciplina_id, valor, tipoAvaliacao, dataLancamento) VALUES (?, ?, ?, ?, ?)`;
     db.run(sql, [ matricula_id, disciplina_id, valor, tipoAvaliacao, dataLancamento ], function(err) {
       if (err) return res.status(500).json({ erro: err.message });
@@ -52,6 +54,10 @@ class NotasController {
     const { matricula_id, disciplina_id, valor, tipoAvaliacao, dataLancamento} = req.body;
 
     const sql = `UPDATE notas SET matricula.id = ?, disciplina.id= ?, valor = ?, tipoAvaliacao = ?, dataLancamento = ? WHERE id = ?`;
+    if (valor < 0 || valor > 10) {
+       return res.status(400).json({ erro: "A nota deve estar entre 0.0 e 10.0." });
+      }
+
     db.run(sql, [matricula_id, disciplina_id, valor, tipoAvaliacao, dataLancamento, id], function(err) {
       if (err) return res.status(500).json({ erro: err.message });
       if (this.changes === 0) return res.status(404).json({ erro: "Nota não encontrada." });
