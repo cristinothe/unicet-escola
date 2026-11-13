@@ -4,7 +4,7 @@ const EstudanteController = require('../controllers/EstudanteController');
 
 router.get('/estudante', EstudanteController.listarTodos);
 router.get('/estudante/:id', EstudanteController.listarPorId);
-router.get('/estudante/', EstudanteController.listarNome);
+router.get('/estudante/nome', EstudanteController.listarNome);
 router.post('/estudante', EstudanteController.salvar);
 router.put('/estudante/:id', EstudanteController.editar);
 router.delete('/estudante/:id', EstudanteController.deletar);

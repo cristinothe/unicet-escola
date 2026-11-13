@@ -31,16 +31,11 @@ class EstudanteController {
         if (err) return res.status(500).json({ erro: err.message });
         return res.status(200).json(rows);
       });
-    }else{
-
-     db.all("SELECT * FROM estudantes", [], (err, rows) => {
-     if (err) return res.status(500).json({ erro: err.message });
-        return res.status(200).json(rows);
-     });
-
     }
 
     }
+
+    
 
    
 

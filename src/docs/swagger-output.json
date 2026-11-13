@@ -144,7 +144,7 @@
         }
       }
     },
-    "/estudante/": {
+    "/estudante/nome": {
       "get": {
         "description": "",
         "parameters": [
