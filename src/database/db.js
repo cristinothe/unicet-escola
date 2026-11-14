@@ -83,5 +83,33 @@ CREATE TABLE IF NOT EXISTS matriculas (
       FOREIGN KEY (disciplina_id) REFERENCES disciplinas(id)
     )
   `);
+
+  db.run(`
+    CREATE TABLE IF NOT EXISTS turmas (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      codigoTurma TEXT NOT NULL UNIQUE,
+      semestre TEXT NOT NULL,
+      horario TEXT NOT NULL,
+      disciplina_id INTEGER NOT NULL,
+      professor_id INTEGER NOT NULL,
+      FOREIGN KEY (disciplina_id) REFERENCES disciplinas(id),
+      FOREIGN KEY (professor_id) REFERENCES professores(id)
+    )
+  `);
+
+  // 8. Tabela de Frequência (registra presença/falta do aluno matriculado na turma)
+  db.run(`
+    CREATE TABLE IF NOT EXISTS frequencias (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      matricula_id INTEGER NOT NULL,
+      turma_id INTEGER NOT NULL,
+      dataAula TEXT NOT NULL,
+      presente INTEGER NOT NULL DEFAULT 1,
+      FOREIGN KEY (matricula_id) REFERENCES matriculas(id),
+      FOREIGN KEY (turma_id) REFERENCES turmas(id)
+    )
+  `);
+
+
 });
 module.exports = db;

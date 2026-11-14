@@ -7,6 +7,8 @@ const disciplinasRoutes = require('./src/routes/disciplinasRoutes');
 const matriculaRoutes = require('./src/routes/matriculaRoutes');
 const professoresRoutes = require('./src/routes/professoresRoutes');
 const notasRoutes = require('./src/routes/notasRoutes');
+const turmasRoutes = require('./src/routes/turmasRoutes');
+//const frequenciaRoutes = require('./src/routes/frequenciaRoutes');
 const app = express();
 const PORT = 3000;
 
@@ -18,6 +20,8 @@ app.use('/', disciplinasRoutes);
 app.use('/', matriculaRoutes);
 app.use('/', professoresRoutes);
 app.use('/', notasRoutes);
+app.use('/', turmasRoutes);
+//app.use('/', frequenciaRoutes);
 
 app.listen(PORT, () => {
     console.log(`servidor rodando em http://localhost: ${PORT}`);
